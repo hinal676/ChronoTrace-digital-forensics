@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-on-surface font-body-md;
+    /* Matches the mockups' text-selection treatment. */
+    @apply selection:bg-primary-container selection:text-on-primary-container;
+  }
+
+  /* Slim scrollbars, per the design samples' custom scrollbar block. */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.2);
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-variant rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-outline;
+  }
+}
+
+@layer components {
+  .material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    user-select: none;
+  }
+
+  /* The mockups' frosted panel treatment. */
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid #334155;
+  }
+
+  .panel {
+    @apply bg-surface-container-low border border-outline-variant/50 rounded-xl;
+  }
+
+  .field {
+    @apply bg-surface-container border border-outline-variant rounded-md px-3 py-1.5
+           text-body-sm font-body-sm text-on-surface outline-none transition-all
+           focus:border-primary focus:ring-1 focus:ring-primary
+           placeholder:text-on-surface-variant/50;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2
+           text-label-md font-label-md transition-colors disabled:opacity-40
+           disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-on-primary hover:bg-primary-fixed;
+  }
+  .btn-ghost {
+    @apply btn border border-outline-variant text-on-surface
+           hover:bg-surface-container-high;
+  }
+}
+
+/* Respect users who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
